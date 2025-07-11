@@ -14,57 +14,40 @@ body {
     overflow: hidden;
 }
 
-/* Windows 7 Aero Glass Style Container */
+/* Windows 7 Aero Glass Style Container (Mobile/Small) */
 #chat-container {
-    width: 50%;
-    max-width: 800px;
-    min-width: 300px;
-    height: 90vh;
-    margin: auto;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
     background: rgba(215, 232, 255, 0.85);
-    border-radius: 10px;
-    border: 1.5px solid #b2c9e7;
-    box-shadow:
-        0 0 20px 6px rgba(100, 170, 255, 0.18),
-        0 1.5px 0 #c8e6ff inset,
-        0 10px 40px #67a7ff46 inset;
-    backdrop-filter: blur(14px) saturate(1.1) brightness(1.08);
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 
-/* Chat Box: Aero Frosted Glass */
+/* Chat Box: Aero Frosted Glass (Mobile/Small) */
 #chat-box {
     flex-grow: 1;
     overflow-y: auto;
-    padding: 24px;
-    scrollbar-width: thin;
-    scrollbar-color: #a3c5ea #e8f4ff;
+    padding: 12px;
+    scrollbar-width: none;
     background: rgba(232, 244, 255, 0.45);
     box-shadow: 0 2px 12px 0 rgba(120, 160, 220, 0.08) inset;
 }
-
-/* Aero Scrollbar */
 #chat-box::-webkit-scrollbar {
-    width: 10px;
-}
-#chat-box::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #b5d1fb 20%, #8ec5fc 100%);
-    border-radius: 6px;
-    border: 2px solid #e8f4ff;
-    min-height: 30px;
-}
-#chat-box::-webkit-scrollbar-track {
-    background: transparent;
+    display: none;
 }
 
-/* Windows 7-like Chat Bubbles */
+/* Windows 7-like Chat Bubbles (Mobile/Small) */
 .message {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
-    max-width: 70%;
+    margin-bottom: 12px;
+    max-width: 85%;
     filter: drop-shadow(0 2px 3px rgba(140,180,230,0.08));
 }
 
@@ -72,10 +55,10 @@ body {
     align-self: flex-end;
     background: linear-gradient(120deg, #e7f3ff 70%, #d0e6fa 100%);
     color: #194e88;
-    padding: 12px 18px;
-    border-radius: 18px 18px 6px 18px;
-    font-size: 16px;
-    line-height: 1.8;
+    padding: 8px 12px;
+    border-radius: 12px 12px 4px 12px;
+    font-size: 12px;
+    line-height: 1.4;
     box-shadow:
         0 2px 9px rgba(140, 180, 230, 0.11),
         0 1.5px 0 #e6f2ff inset;
@@ -89,10 +72,10 @@ body {
     align-self: flex-start;
     background: linear-gradient(120deg, #f3faff 85%, #e2f2ff 100%);
     color: #20415e;
-    padding: 12px 18px;
-    border-radius: 18px 18px 18px 6px;
-    font-size: 16px;
-    line-height: 1.8;
+    padding: 8px 12px;
+    border-radius: 12px 12px 12px 4px;
+    font-size: 12px;
+    line-height: 1.4;
     box-shadow:
         0 2px 9px rgba(140, 180, 230, 0.11),
         0 1.5px 0 #e6f2ff inset;
@@ -128,25 +111,25 @@ body {
     text-align: left;
 }
 
-/* Aero Input Bar */
+/* Aero Input Bar (Mobile/Small) */
 #chat-form {
     display: flex;
     align-items: center;
-    padding: 16px;
+    padding: 8px;
     background: linear-gradient(to top, #e1f1ff 70%, #f6faff 100%);
     border-top: 1.5px solid #b7cef2;
     box-shadow: 0 -2px 14px 0 rgba(120, 160, 220, 0.07);
 }
 
-/* Aero Input */
+/* Aero Input (Mobile/Small) */
 #user-input {
     flex-grow: 1;
-    padding: 12px 16px;
+    padding: 8px 12px;
     border: 1.5px solid #b2cbe7;
-    border-radius: 18px;
+    border-radius: 14px;
     background: rgba(255,255,255,0.95);
     color: #20415e;
-    font-size: 16px;
+    font-size: 12px;
     outline: none;
     resize: none;
     box-shadow: 0 1.5px 8px 0 rgba(120, 160, 220, 0.06) inset;
@@ -156,17 +139,17 @@ body {
     box-shadow: 0 0 0 3px #c9e2ff;
 }
 
-/* Aero Buttons */
+/* Aero Buttons (Mobile/Small) */
 button {
-    padding: 12px 20px;
+    padding: 8px 12px;
     margin-left: 8px;
     background: linear-gradient(to bottom, #e1f1ff 80%, #b3d6fb 100%);
     border: 1.5px solid #a4cfff;
     color: #1859a9;
-    border-radius: 18px;
+    border-radius: 14px;
     cursor: pointer;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 12px;
     box-shadow: 0px 2px 8px rgba(74, 164, 255, 0.09);
     display: flex;
     align-items: center;
@@ -189,15 +172,15 @@ button svg {
     height: 1em;
 }
 
-/* Aero Form Button Container */
+/* Aero Form Button Container (Mobile/Small) */
 .form-btn-container {
     display: flex;
     gap: 8px;
 }
 .form-btn-container button {
-    padding: 10px;
-    width: 56px;
-    height: 56px;
+    padding: 6px;
+    width: 40px;
+    height: 40px;
     background: linear-gradient(to bottom, #e7f5ff 80%, #c8e0fa 100%);
     border: 1.5px solid #b3d1f7;
     border-radius: 50%;
@@ -215,72 +198,17 @@ button svg {
     transform: translateY(0);
 }
 
-/* Aero Code Wrapper */
+/* Aero Code Wrapper (Mobile/Small) */
 .code-wrapper {
     overflow-x: auto;
     background: linear-gradient(90deg, #eaf4ff 80%, #cbe3ff 100%);
     color: #2c3e50;
-    padding: 12px;
-    border-radius: 8px;
+    padding: 8px;
+    border-radius: 6px;
     font-family: 'Consolas', 'Courier New', Courier, monospace;
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 12px;
+    line-height: 1.4;
     white-space: pre-wrap;
     border: 1.5px solid #b3d1f7;
     box-shadow: 0 1.5px 7px rgba(120, 160, 220, 0.09) inset;
-}
-
-/* Mobile Layout for smaller screens (max-width: 900px) */
-@media (max-width: 900px) {
-    #chat-container {
-        width: 100%;
-        max-width: 100%;
-        height: 100vh;
-        margin: 0 auto;
-        border-radius: 0;
-        box-shadow: none;
-        border: none;
-    }
-    #chat-box {
-        padding: 12px;
-        scrollbar-width: none;
-    }
-    #chat-box::-webkit-scrollbar {
-        display: none;
-    }
-    .message {
-        margin-bottom: 12px;
-        max-width: 85%;
-    }
-    .user-message,
-    .assistant-message {
-        font-size: 12px;
-        line-height: 1.4;
-        padding: 8px 12px;
-        border-radius: 12px 12px 4px 12px;
-    }
-    #chat-form {
-        padding: 8px;
-    }
-    #user-input {
-        padding: 8px 12px;
-        font-size: 12px;
-        border-radius: 14px;
-    }
-    button {
-        padding: 8px 12px;
-        font-size: 12px;
-        border-radius: 14px;
-    }
-    .form-btn-container button {
-        padding: 6px;
-        width: 40px;
-        height: 40px;
-    }
-    .code-wrapper {
-        font-size: 12px;
-        padding: 8px;
-        border-radius: 6px;
-        line-height: 1.4;
-    }
 }
