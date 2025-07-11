@@ -30,6 +30,16 @@
       </button>
     </form>
   </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmClearModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+      <p>Are you sure you want to clear the chat history?</p>
+      <button id="confirmClearYes">Yes</button>
+      <button id="confirmClearNo">No</button>
+    </div>
+  </div>
+
   <script>
     // Performance Mode Detection
     let lowMemoryMode = false;
@@ -196,10 +206,24 @@
       return localStorage.getItem('displayName') || 'Guest';
     }
 
-    document.getElementById('clear-btn').addEventListener('click', () => {
+    // ---- Confirm Modal Logic ----
+    const clearBtn = document.getElementById('clear-btn');
+    const modal = document.getElementById('confirmClearModal');
+    const yesBtn = document.getElementById('confirmClearYes');
+    const noBtn = document.getElementById('confirmClearNo');
+
+    clearBtn.addEventListener('click', () => {
+      modal.classList.add('active');
+    });
+    noBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+    yesBtn.addEventListener('click', () => {
       localStorage.removeItem('chatHistory');
+      modal.classList.remove('active');
       window.location.reload();
     });
+    // ---- End Confirm Modal Logic ----
 
     // Initial render
     renderChatHistory();
