@@ -210,55 +210,77 @@ button svg {
     box-shadow: 0 1.5px 7px rgba(120, 160, 220, 0.09) inset;
 }
 
-/* Confirm Modal Styles */
+/* Confirm Modal Styles - MATCH AERO STYLE */
 .confirm-modal {
   display: none;
   position: fixed;
   z-index: 1000;
   left: 0; top: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 30, 60, 0.13);
+  backdrop-filter: blur(2.5px);
   justify-content: center;
   align-items: center;
+  animation: confirmModalFadeIn 0.22s cubic-bezier(.4,0,.2,1);
 }
 .confirm-modal.active {
   display: flex;
 }
+@keyframes confirmModalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 .confirm-modal-content {
-  background: #fff;
+  background: linear-gradient(135deg, #e3eeff 0%, #b8cbe9 100%);
   color: #181a1b;
   padding: 2em 2.5em;
-  border-radius: 10px;
+  border-radius: 22px;
   text-align: center;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+  box-shadow: 0 4px 32px 0 rgba(120, 160, 220, 0.18), 0 1.5px 0 #e6f2ff inset;
   min-width: 260px;
   max-width: 90vw;
+  border: 1.5px solid #b3d1f7;
+  backdrop-filter: blur(2.5px);
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  transition: box-shadow 0.2s, border 0.2s, background 0.2s;
 }
 .confirm-modal-content p {
   margin-bottom: 1.3em;
   font-size: 1.1em;
+  color: #20415e;
+  font-weight: 500;
 }
 .confirm-modal-content button {
   margin: 0 0.7em;
   padding: 0.6em 2.2em;
-  border: none;
-  border-radius: 5px;
-  background: #e3e6e8;
-  color: #181a1b;
-  cursor: pointer;
+  border-radius: 14px;
+  border: 1.5px solid #b3d1f7;
+  background: linear-gradient(to bottom, #e7f3ff 80%, #d0e6fa 100%);
+  color: #194e88;
   font-size: 1em;
   font-weight: 600;
-  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  box-shadow: 0px 2px 8px rgba(74, 164, 255, 0.08);
+  transition: background 0.18s, color 0.18s, border 0.18s;
 }
 .confirm-modal-content button#confirmClearYes {
-  background: #e06262;
+  background: linear-gradient(to bottom, #e06262 80%, #c23b3b 100%);
   color: #fff;
+  border-color: #be3b3b;
+  box-shadow: 0 0 8px #e06262;
 }
 .confirm-modal-content button#confirmClearYes:hover {
-  background: #c23b3b;
+  background: linear-gradient(to bottom, #c23b3b 80%, #a02e2e 100%);
+}
+.confirm-modal-content button#confirmClearNo {
+  background: linear-gradient(to bottom, #e1f1ff 80%, #b8cbe9 100%);
+  color: #194e88;
+  border-color: #b3d1f7;
 }
 .confirm-modal-content button#confirmClearNo:hover {
-  background: #cfd6da;
+  background: linear-gradient(to bottom, #d0eaff 80%, #a1c7f7 100%);
+  color: #1867c0;
+  border-color: #357ae8;
 }
 
 /* PERFORMANCE MODE: Low-Memory Devices */
@@ -279,4 +301,20 @@ body.low-memory .profile img {
 }
 body.low-memory .code-wrapper {
     box-shadow: none !important;
+}
+
+/* Low-memory mode for confirm modal */
+body.low-memory .confirm-modal {
+  backdrop-filter: none !important;
+  background: #e0edfa !important;
+  box-shadow: none !important;
+}
+body.low-memory .confirm-modal-content {
+  background: #e0edfa !important;
+  box-shadow: none !important;
+  border: 1.5px solid #b3d1f7;
+  backdrop-filter: none !important;
+}
+body.low-memory .confirm-modal-content button {
+  box-shadow: none !important;
 }
