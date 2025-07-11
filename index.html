@@ -126,14 +126,7 @@
                 }
             }
         });
-
-        function setTheme(theme) {
-            themeLink.href = `https://voltaccept.com/codex/assets/css/${theme}-theme.css`;
-            localStorage.setItem('theme', theme);
-        }
-
-        setTheme(currentTheme);
-
+        
         function addMessage(message, sender) {
             const messages = document.getElementById("messages");
 
@@ -229,6 +222,4 @@
             window.location.reload();
         });
     </script>
-
-
 </body>
