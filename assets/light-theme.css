@@ -14,7 +14,6 @@ body {
     overflow: hidden;
 }
 
-/* Windows 7 Aero Glass Style Container (Mobile/Small) */
 #chat-container {
     width: 100%;
     max-width: 100%;
@@ -29,7 +28,6 @@ body {
     overflow: hidden;
 }
 
-/* Chat Box: Aero Frosted Glass (Mobile/Small) */
 #chat-box {
     flex-grow: 1;
     overflow-y: auto;
@@ -42,21 +40,12 @@ body {
     display: none;
 }
 
-/* Windows 7-like Chat Bubbles (Mobile/Small) */
 .message {
     display: flex;
     flex-direction: column;
     margin-bottom: 12px;
     max-width: 85%;
     filter: drop-shadow(0 2px 3px rgba(140,180,230,0.08));
-}
-
-.user-message {
-    align-self: flex-end;
-    background: linear-gradient(120deg, #e7f3ff 70%, #d0e6fa 100%);
-    color: #194e88;
-    padding: 8px 12px;
-    border-radius: 12px 12px 4px 12px;
     font-size: 12px;
     line-height: 1.4;
     box-shadow:
@@ -66,6 +55,14 @@ body {
     max-width: 75%;
     text-align: left;
     backdrop-filter: blur(2.5px);
+}
+
+.user-message {
+    align-self: flex-end;
+    background: linear-gradient(120deg, #e7f3ff 70%, #d0e6fa 100%);
+    color: #194e88;
+    padding: 8px 12px;
+    border-radius: 12px 12px 4px 12px;
 }
 
 .assistant-message {
@@ -211,4 +208,24 @@ button svg {
     white-space: pre-wrap;
     border: 1.5px solid #b3d1f7;
     box-shadow: 0 1.5px 7px rgba(120, 160, 220, 0.09) inset;
+}
+
+/* PERFORMANCE MODE: Low-Memory Devices */
+body.low-memory #chat-box,
+body.low-memory .message,
+body.low-memory .assistant-message,
+body.low-memory .user-message {
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+}
+body.low-memory #chat-container {
+    background: #e0edfa !important;
+}
+body.low-memory .profile img {
+    box-shadow: none !important;
+    border: 1px solid #b3d1f7;
+}
+body.low-memory .code-wrapper {
+    box-shadow: none !important;
 }
