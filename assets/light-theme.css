@@ -210,77 +210,97 @@ button svg {
     box-shadow: 0 1.5px 7px rgba(120, 160, 220, 0.09) inset;
 }
 
-/* Confirm Modal Styles - MATCH AERO STYLE */
 .confirm-modal {
   display: none;
   position: fixed;
   z-index: 1000;
   left: 0; top: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0, 30, 60, 0.13);
-  backdrop-filter: blur(2.5px);
+  background: rgba(0,0,0,0.25);
   justify-content: center;
   align-items: center;
-  animation: confirmModalFadeIn 0.22s cubic-bezier(.4,0,.2,1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .confirm-modal.active {
   display: flex;
 }
-@keyframes confirmModalFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
 .confirm-modal-content {
-  background: linear-gradient(135deg, #e3eeff 0%, #b8cbe9 100%);
-  color: #181a1b;
-  padding: 2em 2.5em;
-  border-radius: 22px;
+  /* Windows 7 style gradient + border */
+  background:
+    linear-gradient(180deg,#f7fbff 60%,#e4ecf7 100%);
+  color: #1a2251;
+  padding: 26px 36px 18px 36px;
+  border-radius: 7px;
   text-align: center;
-  box-shadow: 0 4px 32px 0 rgba(120, 160, 220, 0.18), 0 1.5px 0 #e6f2ff inset;
-  min-width: 260px;
-  max-width: 90vw;
-  border: 1.5px solid #b3d1f7;
-  backdrop-filter: blur(2.5px);
-  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-  transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+  min-width: 320px;
+  max-width: 95vw;
+  border: 1.5px solid #a1b4ca;
+  box-shadow:
+    0 0 0 1.5px #fff inset,
+    0 2px 12px 2px rgba(143,174,217,0.18),
+    0 1.5px 0 #dbe7f7 inset;
+  outline: 2.5px solid #dbe7f7;
+  outline-offset: -4px;
 }
 .confirm-modal-content p {
-  margin-bottom: 1.3em;
-  font-size: 1.1em;
-  color: #20415e;
-  font-weight: 500;
+  margin-bottom: 1.2em;
+  font-size: 1.08em;
+  color: #235a9d;
+  font-weight: 600;
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #e4eaf1;
 }
 .confirm-modal-content button {
-  margin: 0 0.7em;
-  padding: 0.6em 2.2em;
-  border-radius: 14px;
-  border: 1.5px solid #b3d1f7;
-  background: linear-gradient(to bottom, #e7f3ff 80%, #d0e6fa 100%);
-  color: #194e88;
+  margin: 0 0.5em;
+  padding: 0.5em 2em;
+  min-width: 96px;
+  border-radius: 3.5px;
+  border: 1.5px solid #90a4c6;
+  background:
+    linear-gradient(180deg,#f8fafc 60%,#e3eaf4 100%);
+  color: #174181;
   font-size: 1em;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: 0px 2px 8px rgba(74, 164, 255, 0.08);
-  transition: background 0.18s, color 0.18s, border 0.18s;
+  box-shadow:
+    0 1px 0 #fff inset,
+    0 2px 6px 0 rgba(143,174,217,0.10);
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #e4eaf1;
+  transition: background 0.14s, color 0.14s, border 0.14s;
+}
+.confirm-modal-content button:focus {
+  outline: 1.5px solid #357ae8;
+  outline-offset: 1px;
 }
 .confirm-modal-content button#confirmClearYes {
-  background: linear-gradient(to bottom, #e06262 80%, #c23b3b 100%);
-  color: #fff;
-  border-color: #be3b3b;
-  box-shadow: 0 0 8px #e06262;
+  background:
+    linear-gradient(180deg,#fbeaea 60%,#f5cccc 100%);
+  color: #b30000;
+  border-color: #c47c7c;
+  box-shadow:
+    0 1px 0 #fff inset,
+    0 2px 8px 0 rgba(217,143,143,0.10);
 }
 .confirm-modal-content button#confirmClearYes:hover {
-  background: linear-gradient(to bottom, #c23b3b 80%, #a02e2e 100%);
+  background:
+    linear-gradient(180deg,#f6c3c3 60%,#e78787 100%);
+  border-color: #b43d3d;
+  color: #fff;
 }
 .confirm-modal-content button#confirmClearNo {
-  background: linear-gradient(to bottom, #e1f1ff 80%, #b8cbe9 100%);
-  color: #194e88;
-  border-color: #b3d1f7;
+  background:
+    linear-gradient(180deg,#f8fafc 60%,#e3eaf4 100%);
+  color: #174181;
+  border-color: #90a4c6;
 }
 .confirm-modal-content button#confirmClearNo:hover {
-  background: linear-gradient(to bottom, #d0eaff 80%, #a1c7f7 100%);
-  color: #1867c0;
+  background:
+    linear-gradient(180deg,#e4f0fd 60%,#b9d5f6 100%);
+  color: #235a9d;
   border-color: #357ae8;
+}
+.confirm-modal-content button:active {
+  background: #e4eaf1;
+  color: #174181;
 }
 
 /* PERFORMANCE MODE: Low-Memory Devices */
@@ -305,16 +325,15 @@ body.low-memory .code-wrapper {
 
 /* Low-memory mode for confirm modal */
 body.low-memory .confirm-modal {
-  backdrop-filter: none !important;
   background: #e0edfa !important;
-  box-shadow: none !important;
 }
 body.low-memory .confirm-modal-content {
   background: #e0edfa !important;
   box-shadow: none !important;
   border: 1.5px solid #b3d1f7;
-  backdrop-filter: none !important;
+  outline: none !important;
 }
 body.low-memory .confirm-modal-content button {
   box-shadow: none !important;
+  background: #f4f7fb !important;
 }
