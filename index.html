@@ -170,7 +170,12 @@
           topP: 0.95,
           maxOutputTokens: outputTokens,
           responseMimeType: "text/plain"
+        },
+        tools: [
+        {
+          google_search: {}
         }
+      ]
       };
       const headers = new Headers();
       headers.append("Content-Type", "application/json");
