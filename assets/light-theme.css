@@ -309,33 +309,14 @@ button svg {
 
 /* PERFORMANCE MODE: Low-Memory Devices */
 body.low-memory #chat-box,
+body.low-memory .profile img,
+body.low-memory .code-wrapper,
+body.low-memory .confirm-modal-content,
+body.low-memory .confirm-modal-content button,
 body.low-memory .message,
 body.low-memory .assistant-message,
 body.low-memory .user-message {
     backdrop-filter: none !important;
     box-shadow: none !important;
     filter: none !important;
-}
-body.low-memory #chat-container {
-    background: #e0edfa !important;
-}
-body.low-memory .profile img {
-    box-shadow: none !important;
-    border: 1px solid #b3d1f7;
-}
-body.low-memory .code-wrapper {
-    box-shadow: none !important;
-}
-body.low-memory .confirm-modal {
-  background: #e0edfa !important;
-}
-body.low-memory .confirm-modal-content {
-  background: #e0edfa !important;
-  box-shadow: none !important;
-  border: 1.5px solid #b3d1f7;
-  outline: none !important;
-}
-body.low-memory .confirm-modal-content button {
-  box-shadow: none !important;
-  background: #f4f7fb !important;
 }
