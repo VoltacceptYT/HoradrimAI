@@ -315,23 +315,6 @@ button svg {
   color: #174181;
 }
 
-/* Modal bottom bar (like image) */
-.confirm-modal-content::after {
-  content: "";
-  display: block;
-  height: 38px;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  border-radius: 0 0 14px 14px;
-  background: linear-gradient(0deg, #e6e9ec 80%, #f9fbfe 100%);
-  border-top: 1.5px solid #c2c5ca;
-  box-shadow: 0 -1.5px 0 #e4eefa;
-  pointer-events: none;
-  z-index: -1;
-}
-
 /* PERFORMANCE MODE: Low-Memory Devices */
 body.low-memory #chat-box,
 body.low-memory .profile img,
