@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TennoNET Overlay
 // @namespace    https://voltacceptyt.github.io/TennoNET
-// @version      3.3
+// @version      3.4
 // @description  A draggable, resizable browser overlay styled like Windows 7 IE, with minimize-to-desktop-icon, and grid snapping.
 // @author       Github Copilot, Microsoft Copilot, Voltaccept
 // @match        *://google.com/
@@ -22,7 +22,7 @@
             position: fixed;
             top: 100px;
             left: 100px;
-            width: 525px;
+            width: 791px;
             height: 445px;
             background: rgba(180, 210, 255, 0.6); /* More opaque and blue-tinted */
             backdrop-filter: blur(14px) saturate(1.5) brightness(1.1); /* Enhanced glassy effect */
