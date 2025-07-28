@@ -210,7 +210,7 @@ button svg {
     box-shadow: 0 1.5px 7px rgba(120, 160, 220, 0.09) inset;
 }
 
-/* Windows 7 Aero Confirm Modal Styles - REMAKE BASED ON IMAGE 1 */
+/* Windows 7 Aero Confirm Modal Styles */
 .confirm-modal {
   display: none;
   position: fixed;
@@ -222,9 +222,11 @@ button svg {
   align-items: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 .confirm-modal.active {
   display: flex;
 }
+
 .confirm-modal-content {
   background: linear-gradient(180deg, #f9fbfe 80%, #e6e9ec 100%);
   border: 1.5px solid #c2c5ca;
@@ -244,6 +246,7 @@ button svg {
   flex-direction: column;
   gap: 0.5em;
 }
+
 .confirm-modal-content p {
   margin-bottom: 1em;
   font-size: 1em;
@@ -252,6 +255,7 @@ button svg {
   font-weight: 400;
   letter-spacing: 0.01em;
 }
+
 .confirm-modal-content .modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -259,7 +263,7 @@ button svg {
   margin-top: 8px;
 }
 
-/* Windows 7-style Buttons - REMAKE BASED ON IMAGE 1 */
+/* Windows 7-style Buttons */
 .confirm-modal-content button {
   min-width: 88px;
   margin: 0 0.15em;
@@ -279,10 +283,12 @@ button svg {
   outline: none;
   display: inline-block;
 }
+
 .confirm-modal-content button:focus {
   outline: 2px solid #3e90e8;
   outline-offset: 0.5px;
 }
+
 .confirm-modal-content button#confirmClearYes,
 .confirm-modal-content button.ok {
   background: linear-gradient(180deg, #e8f6ff 60%, #c1e1fa 100%);
@@ -292,24 +298,28 @@ button svg {
     0 1px 0 #fff inset,
     0 2px 8px 0 rgba(143,174,217,0.09);
 }
+
 .confirm-modal-content button#confirmClearYes:hover,
 .confirm-modal-content button.ok:hover {
   background: linear-gradient(180deg,#c7eafd 60%,#b3d9f5 100%);
   border-color: #43a2e6;
   color: #003d70;
 }
+
 .confirm-modal-content button#confirmClearNo,
 .confirm-modal-content button.cancel {
   background: linear-gradient(180deg,#f8fafc 60%,#e3eaf4 100%);
   color: #174181;
   border-color: #b5c6db;
 }
+
 .confirm-modal-content button#confirmClearNo:hover,
 .confirm-modal-content button.cancel:hover {
   background: linear-gradient(180deg,#e7eaf0 60%,#d2d6db 100%);
   color: #235a9d;
   border-color: #357ae8;
 }
+
 .confirm-modal-content button:active {
   background: #e4eaf1;
   color: #174181;
