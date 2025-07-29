@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         TennoNET Overlay
-// @namespace    https://voltacceptyt.github.io/TennoNET
+// @name         HoradrimAI Overlay
+// @namespace    https://voltacceptyt.github.io/HoradrimAI
 // @version      3.5
 // @description  A draggable, resizable browser overlay styled like Windows 7 IE, with minimize-to-desktop-icon, and grid snapping.
-// @author       Github Copilot, Microsoft Copilot, Voltaccept
+// @author       Github Copilot, Microsoft Copilot, Voltaccept, BlackboxAI
 // @match        *://google.com/
 // @match        *://*.google.com/
 // @grant        none
@@ -12,8 +12,8 @@
 (function () {
     'use strict';
 
-    const HOME_URL = 'https://voltacceptyt.github.io/TennoNET/';
-    const ICON_URL = 'https://voltacceptyt.github.io/TennoNET/assets/tennonet.png';
+    const HOME_URL = 'https://voltacceptyt.github.io/HoradrimAI/';
+    const ICON_URL = 'https://voltacceptyt.github.io/HoradrimAI/assets/icon.png';
     const GRID_SIZE = 64;
 
     const style = document.createElement('style');
@@ -193,7 +193,7 @@
             <div id="ie7-titlebar">
                 <div id="ie7-title">
                     <span class="ie7-title-icon"></span>
-                    <span>TennoNET</span>
+                    <span>HoradrimAI</span>
                 </div>
                 <!-- Home button removed -->
             </div>
@@ -210,7 +210,7 @@
     desktopIcon.id = 'ie7-desktop-icon';
     desktopIcon.innerHTML = `
         <span class="ie7-desktop-icon-img"></span>
-        <div>TennoNET</div>
+        <div>HoradrimAI</div>
     `;
     document.body.appendChild(desktopIcon);
 
