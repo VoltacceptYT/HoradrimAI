@@ -1,237 +1,919 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>HoradrimAI</title>
-  <meta name="author" content="VoltacceptYT">
-  <meta name="keywords" content="HoradrimAI, AI Assistant, Google Gemini, Chatbot, AI, Assistant, ChatGPT, Gemini 2.0">
-  <meta name="description" content="HoradrimAI - Your Diablo II: Lord of Destruction AI Assistant powered by Google Gemini.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href=".assets/icon.png">
-  <link id="theme-link" rel="stylesheet" href="./assets/light-theme.css">
-  <script src="https://cdn.jsdelivr.net/npm/marked@16.0.0/lib/marked.umd.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoradrimAI - Windows 7 Style</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #1e3a8a;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), 
+                              url('./assets/img/wallpaper.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            overflow: hidden;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Desktop Icons */
+        .desktop-icons {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            z-index: 1;
+        }
+
+        .desktop-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+            padding: 8px;
+            border-radius: 5px;
+            user-select: none;
+        }
+
+        .desktop-icon:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .desktop-icon.selected {
+            background-color: rgba(30, 144, 255, 0.3);
+        }
+
+        .desktop-icon-img {
+            width: 48px;
+            height: 48px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-bottom: 8px;
+        }
+
+        .desktop-icon-text {
+            font-size: 13px;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+            text-align: center;
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+
+        /* Windows Overlay */
+        #ie7-overlay {
+            position: fixed;
+            top: 100px;
+            left: 100px;
+            width: 565px;
+            height: 382px;
+            background: rgba(180, 210, 255, 0.6);
+            backdrop-filter: blur(14px) saturate(1.5) brightness(1.1);
+            border: 0px solid rgba(120, 160, 220, 0.7);
+            border-radius: 6px;
+            box-shadow: 0 0 14px rgba(0,0,0,0.45);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            font-family: 'Segoe UI', sans-serif;
+            resize: both;
+            overflow: hidden;
+        }
+
+        #ie7-header {
+            background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(200,220,240,0.4));
+            padding: 4px 8px 4px 8px;
+            cursor: move;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(160,160,160,0.5);
+            user-select: none;
+        }
+
+        #ie7-titlebar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #ie7-title {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #ie7-title .ie7-title-icon {
+            width: 16px;
+            height: 16px;
+            background-image: url('./assets/img/icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: inline-block;
+            flex-shrink: 0;
+            image-rendering: auto;
+            pointer-events: none;
+            user-drag: none;
+            -webkit-user-drag: none;
+        }
+
+        #ie7-title span {
+            font-weight: bold;
+            color: #1a1a1a;
+            text-shadow: 0 1px 0 #fff;
+        }
+
+        .ie7-button {
+            width: 26px;
+            height: 26px;
+            border: 1px solid #5a8ac6;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #dbeeff, #a4cfff);
+            box-shadow: inset 0 1px 0 #ffffff;
+            color: #003366;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ie7-button:hover {
+            background: linear-gradient(to bottom, #c0e0ff, #8fc4ff);
+        }
+
+        #ie7-controls {
+            position: absolute;
+            top: 0;
+            right: 5px;
+            display: flex;
+        }
+
+        #ie7-minimize {
+            background: linear-gradient(to bottom, #eee, #ccc);
+            color: #333;
+            border: 1px solid #666;
+            border-right: none;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 0;
+            width: 26px;
+            height: 18px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        #ie7-close {
+            background: linear-gradient(to bottom, #f66, #c00);
+            color: white;
+            border: 1px solid #900;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 3px;
+            font-weight: bold;
+            text-shadow: 0 -1px 0 #600;
+            width: 52px;
+            height: 18px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        #ie7-desktop-icon {
+            position: fixed;
+            top: 64px;
+            left: 64px;
+            width: 80px;
+            text-align: center;
+            font-size: 13px;
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+            cursor: default;
+            z-index: 9999;
+            display: none;
+            user-select: none;
+        }
+
+        #ie7-desktop-icon .ie7-desktop-icon-img {
+            width: 48px;
+            height: 48px;
+            background-image: url('./assets/img/icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-bottom: 4px;
+            display: inline-block;
+            pointer-events: none;
+            user-drag: none;
+            -webkit-user-drag: none;
+        }
+
+        #ie7-browser {
+            flex: 1;
+            width: 100%;
+            border: none;
+            min-height: 0;
+        }
+
+        /* Taskbar */
+        #taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(to bottom, #316ac5, #2453a0);
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            z-index: 10000;
+            border-top: 1px solid #1c3f80;
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #start-button {
+            height: 32px;
+            background: linear-gradient(to bottom, #7cb7ff, #3d7ab8);
+            border: 1px solid #2a5a94;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: inset 0 1px 0 #a0c8ff;
+            margin-right: 10px;
+        }
+
+        #start-button:hover {
+            background: linear-gradient(to bottom, #8ac2ff, #4d89cc);
+        }
+
+        #start-button:active {
+            background: linear-gradient(to bottom, #3d7ab8, #7cb7ff);
+            box-shadow: inset 0 1px 0 #2a5a94;
+        }
+
+        #taskbar-icons {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            flex: 1;
+            height: 100%;
+        }
+
+        .taskbar-icon {
+            height: 34px;
+            width: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+            color: white;
+            font-size: 12px;
+        }
+
+        .taskbar-icon:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .taskbar-icon.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-bottom: 2px solid #7cb7ff;
+        }
+
+        .taskbar-icon i {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        #system-tray {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding-right: 10px;
+        }
+
+        #clock {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 2px 10px;
+            border-radius: 3px;
+            font-size: 13px;
+            color: white;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #volume-control {
+            margin-right: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Start Menu */
+        #start-menu {
+            position: fixed;
+            bottom: 40px;
+            left: 5px;
+            width: 400px;
+            height: 500px;
+            background: linear-gradient(to bottom, #316ac5, #2453a0);
+            border-radius: 5px 5px 0 0;
+            box-shadow: 2px -2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+            display: none;
+            overflow: hidden;
+            border: 1px solid #1c3f80;
+        }
+
+        #start-header {
+            height: 100px;
+            background: linear-gradient(to right, #4a8ad4, #316ac5);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #1c3f80;
+        }
+
+        #start-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #7cb7ff;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            background-image: url('./assets/img/avatar.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        #start-user-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        #start-user-info p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        #start-content {
+            display: flex;
+            height: calc(100% - 100px);
+        }
+
+        #start-programs {
+            width: 60%;
+            padding: 15px;
+            border-right: 1px solid #1c3f80;
+        }
+
+        #start-programs h4 {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #a0c8ff;
+        }
+
+        .start-program-item {
+            padding: 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .start-program-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .start-program-item i {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        #start-sidebar {
+            width: 40%;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .start-sidebar-item {
+            padding: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .start-sidebar-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .start-sidebar-item i {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Additional desktop icons with local images */
+        #computer-icon .desktop-icon-img {
+            background-image: url('./assets/img/computer.png');
+        }
+
+        #documents-icon .desktop-icon-img {
+            background-image: url('./assets/img/documents.png');
+        }
+
+        #recycle-bin-icon .desktop-icon-img {
+            background-image: url('./assets/img/recycle-bin.png');
+        }
+        
+        #network-icon .desktop-icon-img {
+            background-image: url('./assets/img/network.png');
+        }
+        
+        #pictures-icon .desktop-icon-img {
+            background-image: url('./assets/img/pictures.png');
+        }
+        
+        #music-icon .desktop-icon-img {
+            background-image: url('./assets/img/music.png');
+        }
+        
+        /* Fallback styling if images don't load */
+        .desktop-icon-img {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        
+        /* Windows logo for start button fallback */
+        .fa-windows {
+            color: #7cb7ff;
+        }
+    </style>
 </head>
 <body>
-  <div id="chat-container">
-    <div id="chat-box">
-      <div id="messages"></div>
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+        <div class="desktop-icon" id="computer-icon" onclick="openDesktopApp('computer')">
+            <div class="desktop-icon-img"></div>
+            <div class="desktop-icon-text">Computer</div>
+        </div>
+        <div class="desktop-icon" id="documents-icon" onclick="openDesktopApp('documents')">
+            <div class="desktop-icon-img"></div>
+            <div class="desktop-icon-text">Documents</div>
+        </div>
+        <div class="desktop-icon" id="recycle-bin-icon" onclick="openDesktopApp('recycle')">
+            <div class="desktop-icon-img"></div>
+            <div class="desktop-icon-text">Recycle Bin</div>
+        </div>
+        <div class="desktop-icon" id="network-icon" onclick="openDesktopApp('network')">
+            <div class="desktop-icon-img"></div>
+            <div class="desktop-icon-text">Network</div>
+        </div>
+        <div class="desktop-icon" id="pictures-icon" onclick="openDesktopApp('pictures')">
+            <div class="desktop-icon-img"></div>
+            <div class="desktop-icon-text">Pictures</div>
+        </div>
+        <div class="desktop-icon" id="music-icon" onclick="openDesktopApp('music')">
+            <div class="desktop-icon-img"></div>
+            <div class="desktop-icon-text">Music</div>
+        </div>
     </div>
-    <form id="chat-form">
-      <textarea type="text" id="user-input" placeholder="Type your message here..." required="" style="white-space: pre-wrap;"></textarea>
-      <button type="submit">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-          <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"></path>
-        </svg>
-      </button>
-      <button type="button" id="clear-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"></path>
-        </svg>
-      </button>
-    </form>
-  </div>
 
-  <!-- Confirmation Modal -->
-  <div id="confirmClearModal" class="confirm-modal">
-    <div class="confirm-modal-content">
-      <p>Are you sure you want to clear the chat history?</p>
-      <button id="confirmClearYes">Yes</button>
-      <button id="confirmClearNo">No</button>
+    <!-- HoradrimAI Overlay Window -->
+    <div id="ie7-overlay">
+        <div id="ie7-header">
+            <div id="ie7-titlebar">
+                <div id="ie7-title">
+                    <span class="ie7-title-icon"></span>
+                    <span>HoradrimAI</span>
+                </div>
+            </div>
+            <div id="ie7-controls">
+                <button id="ie7-minimize">—</button>
+                <button id="ie7-close">✖</button>
+            </div>
+        </div>
+        <iframe id="ie7-browser" src="./horadrim.ai/"></iframe>
     </div>
-  </div>
 
-  <script>
-    // Performance Mode Detection
-    let lowMemoryMode = false;
-    if (navigator.deviceMemory && navigator.deviceMemory <= 4) {
-      lowMemoryMode = true;
-      document.body.classList.add('low-memory');
-    }
+    <!-- Desktop Icon for Minimized Window -->
+    <div id="ie7-desktop-icon">
+        <span class="ie7-desktop-icon-img"></span>
+        <div>HoradrimAI</div>
+    </div>
 
-    // Chat history management with memory usage in mind
-    const MAX_HISTORY = lowMemoryMode ? 25 : 50;
-    let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
-    let themeLink = document.getElementById('theme-link');
-    let recognition;
+    <!-- Windows 7 Taskbar -->
+    <div id="taskbar">
+        <button id="start-button">
+            <i class="fab fa-windows"></i>
+            Start
+        </button>
+        
+        <div id="taskbar-icons">
+            <div class="taskbar-icon active" id="taskbar-horadrim" onclick="restoreHoradrim()">
+                <i class="fas fa-robot"></i>
+                <span>HoradrimAI</span>
+            </div>
+            <div class="taskbar-icon" onclick="openDesktopApp('computer')">
+                <i class="fas fa-desktop"></i>
+                <span>Computer</span>
+            </div>
+            <div class="taskbar-icon" onclick="openDesktopApp('documents')">
+                <i class="fas fa-folder"></i>
+                <span>Documents</span>
+            </div>
+            <div class="taskbar-icon" onclick="window.open('https://www.google.com', '_blank')">
+                <i class="fab fa-chrome"></i>
+                <span>Browser</span>
+            </div>
+            <div class="taskbar-icon" onclick="openDesktopApp('pictures')">
+                <i class="fas fa-images"></i>
+                <span>Pictures</span>
+            </div>
+        </div>
+        
+        <div id="system-tray">
+            <div id="volume-control">
+                <i class="fas fa-volume-up"></i>
+            </div>
+            <div id="clock">10:25 AM</div>
+        </div>
+    </div>
 
-    function handleGoogleLoginResponse(response) {
-      const credential = JSON.parse(atob(response.credential.split('.')[1]));
-      const userName = credential.name;
-      const userPicture = credential.picture;
-      localStorage.setItem('displayName', userName);
-      localStorage.setItem('profilePicture', userPicture);
-      window.location.reload();
-    }
+    <!-- Start Menu -->
+    <div id="start-menu">
+        <div id="start-header">
+            <div id="start-avatar">
+                <!-- Background image set via CSS -->
+            </div>
+            <div id="start-user-info">
+                <h3>Windows 7 User</h3>
+                <p>HoradrimAI Desktop</p>
+            </div>
+        </div>
+        <div id="start-content">
+            <div id="start-programs">
+                <h4>All Programs</h4>
+                <div class="start-program-item" onclick="restoreHoradrim()">
+                    <i class="fas fa-robot"></i>
+                    <span>HoradrimAI</span>
+                </div>
+                <div class="start-program-item" onclick="openDesktopApp('computer')">
+                    <i class="fas fa-desktop"></i>
+                    <span>Computer</span>
+                </div>
+                <div class="start-program-item" onclick="openDesktopApp('documents')">
+                    <i class="fas fa-folder"></i>
+                    <span>Documents</span>
+                </div>
+                <div class="start-program-item" onclick="window.open('https://www.google.com', '_blank')">
+                    <i class="fab fa-chrome"></i>
+                    <span>Google Chrome</span>
+                </div>
+                <div class="start-program-item" onclick="window.open('https://github.com', '_blank')">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </div>
+                <div class="start-program-item" onclick="openDesktopApp('pictures')">
+                    <i class="fas fa-images"></i>
+                    <span>Pictures</span>
+                </div>
+                <div class="start-program-item" onclick="openDesktopApp('music')">
+                    <i class="fas fa-music"></i>
+                    <span>Music</span>
+                </div>
+            </div>
+            <div id="start-sidebar">
+                <div class="start-sidebar-item" onclick="openDesktopApp('computer')">
+                    <i class="fas fa-user"></i>
+                    <span>User</span>
+                </div>
+                <div class="start-sidebar-item" onclick="openDesktopApp('documents')">
+                    <i class="fas fa-file"></i>
+                    <span>Documents</span>
+                </div>
+                <div class="start-sidebar-item" onclick="openDesktopApp('pictures')">
+                    <i class="fas fa-images"></i>
+                    <span>Pictures</span>
+                </div>
+                <div class="start-sidebar-item" onclick="openDesktopApp('music')">
+                    <i class="fas fa-music"></i>
+                    <span>Music</span>
+                </div>
+                <div class="start-sidebar-item" onclick="window.open('https://www.google.com', '_blank')">
+                    <i class="fas fa-cog"></i>
+                    <span>Control Panel</span>
+                </div>
+                <div class="start-sidebar-item" onclick="shutdown()">
+                    <i class="fas fa-power-off"></i>
+                    <span>Shut Down</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    function getOperatorProfilePicture() {
-      return localStorage.getItem('profilePicture') || 'https://voltaccept.com/codex/assets/img/user-profile.png';
-    }
+    <script>
+        // Constants
+        const GRID_SIZE = 64;
+        const HOME_URL = './horadrim.ai/';
+        const overlay = document.getElementById('ie7-overlay');
+        const desktopIcon = document.getElementById('ie7-desktop-icon');
+        const startButton = document.getElementById('start-button');
+        const startMenu = document.getElementById('start-menu');
+        const clockElement = document.getElementById('clock');
+        const taskbarHoradrim = document.getElementById('taskbar-horadrim');
+        const volumeControl = document.getElementById('volume-control');
 
-    function checkLoginStatus() {
-      const displayName = localStorage.getItem('displayName');
-      if (displayName) {
-        const googleOnloadElement = document.getElementById('g_id_onload');
-        if (googleOnloadElement) {
-          googleOnloadElement.remove();
-        }
-      }
-    }
-    document.addEventListener('DOMContentLoaded', checkLoginStatus);
-
-    // Load chat history (limit for performance)
-    function renderChatHistory() {
-      const messages = document.getElementById('messages');
-      messages.innerHTML = '';
-      let startIdx = Math.max(0, chatHistory.length - MAX_HISTORY);
-      chatHistory.slice(startIdx).forEach((message) => {
-        addMessage(message.text, message.role, false);
-      });
-      messages.scrollTop = messages.scrollHeight;
-    }
-
-    document.getElementById("chat-form").addEventListener("submit", function (event) {
-      event.preventDefault();
-      const userInput = document.getElementById("user-input").value;
-      addMessage(userInput, "user");
-      fetchGeminiResponse(userInput);
-      document.getElementById("user-input").value = "";
-    });
-
-    document.getElementById("user-input").addEventListener("keydown", function (event) {
-      if (event.key === "Enter") {
-        if (event.shiftKey) {
-          const cursorPosition = this.selectionStart;
-          const value = this.value;
-          this.value = value.slice(0, cursorPosition) + "\n" + value.slice(cursorPosition);
-          this.selectionEnd = cursorPosition + 1;
-          event.preventDefault();
-        } else {
-          event.preventDefault();
-          document.getElementById("chat-form").dispatchEvent(new Event("submit"));
-        }
-      }
-    });
-
-    function addMessage(message, sender, save = true) {
-      const messages = document.getElementById("messages");
-      const profile = document.createElement('div');
-      profile.classList.add('profile', `${sender}-profile`);
-      const messageElement = document.createElement("div");
-      messageElement.classList.add("message", `${sender}-message`);
-
-      if (sender === "assistant") {
-        const formattedMessage = marked.parse(message);
-        messageElement.innerHTML = formattedMessage;
-      } else {
-        const userText = message.replace(/\n/g, '<br>');
-        messageElement.innerHTML = marked.parse(userText);
-      }
-
-      if (sender === "user") {
-        profile.innerHTML = `<img src="${getOperatorProfilePicture()}" alt="User Profile Picture" class="profile-picture"><p class="name">${getOperatorName()}</p>`;
-        messages.appendChild(profile);
-        messages.appendChild(messageElement);
-      } else if (sender === "assistant") {
-        profile.innerHTML = `<img src="./assets/icon.png" alt="AI Profile Picture" class="profile-picture"><p class="name">HoradrimAI</p>`;
-        messages.appendChild(profile);
-        messages.appendChild(messageElement);
-      }
-
-      // Store chatHistory in memory and localStorage, enforcing a max
-      if (save) {
-        chatHistory.push({ role: sender === "user" ? "user" : "assistant", text: message });
-        if (chatHistory.length > MAX_HISTORY) {
-          chatHistory = chatHistory.slice(chatHistory.length - MAX_HISTORY);
-        }
-        localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
-      }
-    }
-
-    async function fetchGeminiResponse(message) {
-      console.log(`Sending message to API: ${message}`);
-      const base64ApiKey = "QUl6YVN5Q2dhZkNLcFFUTVBjeWxKSUdjLXNBd0l4XzVJVkxuZDNz";
-      const apiKey = atob(base64ApiKey);
-
-      // Reduce output tokens for low memory
-      const outputTokens = lowMemoryMode ? 1024 : 2048;
-      const data = {
-        contents: chatHistory.slice(-10).map(msg => ({ role: msg.role, parts: [{ text: msg.text }] })), // Only last 10 for system prompt
-        systemInstruction: {
-          role: "assistant",
-          parts: [
-            {
-              text: `You are HoradrimAI, a Diablo II: Lord of Destruction AI assistant integrated with the Diablo II Wiki (https://wiki.diablo.run/); deliver precise, consistent information about characters, skills, items, quests, and gameplay systems—format code and builds cleanly, include relevant context, exclude filler, and address the player as ${getOperatorName()}.`
+        // Initialize overlay dragging
+        let draggingOverlay = false, offsetX = 0, offsetY = 0;
+        const header = document.getElementById('ie7-header');
+        
+        header.addEventListener('mousedown', (e) => {
+            draggingOverlay = true;
+            offsetX = e.clientX - overlay.offsetLeft;
+            offsetY = e.clientY - overlay.offsetTop;
+            e.preventDefault();
+            bringToFront(overlay);
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (draggingOverlay) {
+                overlay.style.left = `${e.clientX - offsetX}px`;
+                overlay.style.top = `${e.clientY - offsetY}px`;
             }
-          ]
-        },
-        generationConfig: {
-          temperature: 1,
-          topK: 40,
-          topP: 0.95,
-          maxOutputTokens: outputTokens,
-          responseMimeType: "text/plain"
-        },
-        tools: [
-        {
-          google_search: {}
+        });
+        
+        document.addEventListener('mouseup', () => draggingOverlay = false);
+
+        // Initialize desktop icon dragging
+        let draggingIcon = false, iconOffsetX = 0, iconOffsetY = 0;
+        desktopIcon.addEventListener('mousedown', (e) => {
+            draggingIcon = true;
+            iconOffsetX = e.clientX - desktopIcon.offsetLeft;
+            iconOffsetY = e.clientY - desktopIcon.offsetTop;
+            e.preventDefault();
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (draggingIcon) {
+                const x = Math.round((e.clientX - iconOffsetX) / GRID_SIZE) * GRID_SIZE;
+                const y = Math.round((e.clientY - iconOffsetY) / GRID_SIZE) * GRID_SIZE;
+                desktopIcon.style.left = `${x}px`;
+                desktopIcon.style.top = `${y}px`;
+            }
+        });
+        
+        document.addEventListener('mouseup', () => draggingIcon = false);
+
+        // Double-click to restore window from desktop icon
+        desktopIcon.addEventListener('dblclick', restoreHoradrim);
+
+        // Minimize window
+        document.getElementById('ie7-minimize').onclick = () => {
+            overlay.style.display = 'none';
+            desktopIcon.style.display = 'block';
+            taskbarHoradrim.classList.remove('active');
+        };
+
+        // Close window
+        document.getElementById('ie7-close').onclick = () => {
+            if (confirm('Close HoradrimAI window?')) {
+                overlay.remove();
+                desktopIcon.remove();
+                taskbarHoradrim.remove();
+            }
+        };
+
+        // Restore window from taskbar or desktop icon
+        function restoreHoradrim() {
+            overlay.style.display = 'flex';
+            desktopIcon.style.display = 'none';
+            taskbarHoradrim.classList.add('active');
+            bringToFront(overlay);
+            closeStartMenu();
         }
-      ]
-      };
-      const headers = new Headers();
-      headers.append("Content-Type", "application/json");
-      try {
-        const response = await fetch(
-          "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey,
-          {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(data)
-          }
-        );
-        if (!response.ok) {
-          const errorResponse = await response.json();
-          console.error('API Request Failed:', errorResponse);
-          throw new Error(`HTTP error! status: ${response.status}`);
+
+        // Start menu functionality
+        startButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            startMenu.style.display = startMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close start menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!startMenu.contains(e.target) && e.target !== startButton) {
+                closeStartMenu();
+            }
+        });
+
+        function closeStartMenu() {
+            startMenu.style.display = 'none';
         }
-        const result = await response.json();
-        console.log(result);
-        if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
-          const botMessage = result.candidates[0].content.parts[0].text.trim();
-          addMessage(botMessage, "assistant");
-        } else {
-          addMessage("I'm sorry, I am currently unable to process your request.", "assistant");
+
+        // Update clock every second
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            clockElement.textContent = timeString;
         }
-      } catch (error) {
-        console.error("Error:", error);
-        addMessage("I'm sorry, I am currently unable to process your request.", "assistant");
-      }
-    }
+        
+        setInterval(updateClock, 1000);
+        updateClock();
 
-    function getOperatorName() {
-      return localStorage.getItem('displayName') || 'Guest';
-    }
+        // Desktop icon click handlers
+        function openDesktopApp(app) {
+            const appNames = {
+                'computer': 'Computer',
+                'documents': 'Documents',
+                'recycle': 'Recycle Bin',
+                'network': 'Network',
+                'pictures': 'Pictures',
+                'music': 'Music'
+            };
+            
+            alert(`Opening ${appNames[app] || app}`);
+            // In a real application, this would open the appropriate application
+        }
 
-    // ---- Confirm Modal Logic ----
-    const clearBtn = document.getElementById('clear-btn');
-    const modal = document.getElementById('confirmClearModal');
-    const yesBtn = document.getElementById('confirmClearYes');
-    const noBtn = document.getElementById('confirmClearNo');
+        // Bring window to front when clicked
+        function bringToFront(element) {
+            // Remove 'active' class from all windows
+            document.querySelectorAll('.window').forEach(win => {
+                win.style.zIndex = '9999';
+            });
+            
+            // Bring clicked window to front
+            element.style.zIndex = '10000';
+        }
 
-    clearBtn.addEventListener('click', () => {
-      modal.classList.add('active');
-    });
-    noBtn.addEventListener('click', () => {
-      modal.classList.remove('active');
-    });
-    yesBtn.addEventListener('click', () => {
-      localStorage.removeItem('chatHistory');
-      modal.classList.remove('active');
-      window.location.reload();
-    });
-    // ---- End Confirm Modal Logic ----
+        // Volume control toggle
+        let volumeOn = true;
+        volumeControl.addEventListener('click', () => {
+            volumeOn = !volumeOn;
+            volumeControl.innerHTML = volumeOn ? 
+                '<i class="fas fa-volume-up"></i>' : 
+                '<i class="fas fa-volume-mute"></i>';
+            
+            // Show notification
+            showNotification(volumeOn ? 'Volume: On' : 'Volume: Muted');
+        });
 
-    // Initial render
-    renderChatHistory();
-  </script>
+        // Show notification function
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.bottom = '50px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            notification.style.color = 'white';
+            notification.style.padding = '10px 15px';
+            notification.style.borderRadius = '5px';
+            notification.style.zIndex = '20000';
+            notification.style.fontSize = '14px';
+            notification.textContent = message;
+            notification.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transition = 'opacity 0.5s';
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 500);
+            }, 2000);
+        }
+
+        // Shutdown simulation
+        function shutdown() {
+            const shutdownOverlay = document.createElement('div');
+            shutdownOverlay.style.position = 'fixed';
+            shutdownOverlay.style.top = '0';
+            shutdownOverlay.style.left = '0';
+            shutdownOverlay.style.width = '100%';
+            shutdownOverlay.style.height = '100%';
+            shutdownOverlay.style.backgroundColor = 'black';
+            shutdownOverlay.style.zIndex = '20000';
+            shutdownOverlay.style.display = 'flex';
+            shutdownOverlay.style.alignItems = 'center';
+            shutdownOverlay.style.justifyContent = 'center';
+            shutdownOverlay.style.color = 'white';
+            shutdownOverlay.style.fontSize = '24px';
+            shutdownOverlay.style.fontFamily = 'Segoe UI, sans-serif';
+            shutdownOverlay.textContent = 'Shutting down...';
+            document.body.appendChild(shutdownOverlay);
+            
+            setTimeout(() => {
+                shutdownOverlay.textContent = 'Goodbye!';
+                setTimeout(() => {
+                    document.body.innerHTML = '<div style="width:100%;height:100%;background-color:black;display:flex;align-items:center;justify-content:center;color:white;font-size:20px;">Windows 7 - HoradrimAI Desktop</div>';
+                }, 1000);
+            }, 2000);
+        }
+
+        // Initialize desktop icon positions
+        window.addEventListener('load', () => {
+            // Position desktop icons in a grid
+            const icons = document.querySelectorAll('.desktop-icon');
+            icons.forEach((icon, index) => {
+                const row = Math.floor(index / 3);
+                const col = index % 3;
+                icon.style.position = 'absolute';
+                icon.style.top = `${20 + row * 90}px`;
+                icon.style.left = `${20 + col * 100}px`;
+            });
+            
+            // Set avatar image or fallback
+            const avatar = document.getElementById('start-avatar');
+            avatar.style.backgroundImage = `url('./assets/img/avatar.png')`;
+            
+            // If avatar image fails to load, show icon
+            avatar.addEventListener('error', () => {
+                avatar.style.backgroundImage = 'none';
+                avatar.innerHTML = '<i class="fas fa-user"></i>';
+            });
+        });
+
+        // Make desktop icons draggable
+        const desktopIcons = document.querySelectorAll('.desktop-icon');
+        desktopIcons.forEach(icon => {
+            let draggingDesktopIcon = false;
+            let desktopIconOffsetX = 0, desktopIconOffsetY = 0;
+            
+            icon.addEventListener('mousedown', (e) => {
+                draggingDesktopIcon = true;
+                desktopIconOffsetX = e.clientX - icon.offsetLeft;
+                desktopIconOffsetY = e.clientY - icon.offsetTop;
+                e.preventDefault();
+                
+                // Deselect other icons
+                desktopIcons.forEach(i => i.classList.remove('selected'));
+                // Select this icon
+                icon.classList.add('selected');
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (draggingDesktopIcon) {
+                    const x = e.clientX - desktopIconOffsetX;
+                    const y = e.clientY - desktopIconOffsetY;
+                    icon.style.left = `${x}px`;
+                    icon.style.top = `${y}px`;
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                draggingDesktopIcon = false;
+            });
+        });
+    </script>
 </body>
 </html>
