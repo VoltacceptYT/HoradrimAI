@@ -64,7 +64,7 @@
     }
 
     function getOperatorProfilePicture() {
-      return localStorage.getItem('profilePicture') || 'https://voltaccept.com/codex/assets/img/user-profile.png';
+      return localStorage.getItem('profilePicture') || './assets/user-profile.png';
     }
 
     function checkLoginStatus() {
@@ -149,7 +149,7 @@
 
     async function fetchGeminiResponse(message) {
       console.log(`Sending message to API: ${message}`);
-      const base64ApiKey = "QUl6YVN5Q2dhZkNLcFFUTVBjeWxKSUdjLXNBd0l4XzVJVkxuZDNz";
+      const base64ApiKey = "QUl6YVN5QXJXVVNNU3NvSmRBaDVmT1ZWbGw4clRXNnU2MEdEZERF";
       const apiKey = atob(base64ApiKey);
 
       // Reduce output tokens for low memory
