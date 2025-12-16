@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <title>HoradrimAI</title>
   <meta name="author" content="VoltacceptYT">
-  <meta name="keywords" content="HoradrimAI, AI Assistant, Google Gemini, Chatbot, AI, Assistant, ChatGPT, Gemini 2.0">
-  <meta name="description" content="HoradrimAI - Your Diablo II: Lord of Destruction AI Assistant powered by Google Gemini.">
+  <meta name="keywords" content="HoradrimAI, AI Assistant, DeepSeek, Chatbot, AI, Assistant, ChatGPT, Diablo II">
+  <meta name="description" content="HoradrimAI - Your Diablo II: Lord of Destruction AI Assistant powered by DeepSeek.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="./assets/icon.png">
   <link id="theme-link" rel="stylesheet" href="./assets/light-theme.css">
@@ -51,17 +51,6 @@
     // Chat history management with memory usage in mind
     const MAX_HISTORY = lowMemoryMode ? 25 : 50;
     let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
-    let themeLink = document.getElementById('theme-link');
-    let recognition;
-
-    function handleGoogleLoginResponse(response) {
-      const credential = JSON.parse(atob(response.credential.split('.')[1]));
-      const userName = credential.name;
-      const userPicture = credential.picture;
-      localStorage.setItem('displayName', userName);
-      localStorage.setItem('profilePicture', userPicture);
-      window.location.reload();
-    }
 
     function getOperatorProfilePicture() {
       return localStorage.getItem('profilePicture') || './assets/user-profile.png';
@@ -93,7 +82,7 @@
       event.preventDefault();
       const userInput = document.getElementById("user-input").value;
       addMessage(userInput, "user");
-      fetchGeminiResponse(userInput);
+      fetchDeepSeekResponse(userInput);
       document.getElementById("user-input").value = "";
     });
 
@@ -147,63 +136,77 @@
       }
     }
 
-    async function fetchGeminiResponse(message) {
-      console.log(`Sending message to API: ${message}`);
-      const base64ApiKey = "QUl6YVN5QXJXVVNNU3NvSmRBaDVmT1ZWbGw4clRXNnU2MEdEZERF";
-      const apiKey = atob(base64ApiKey);
-
-      // Reduce output tokens for low memory
-      const outputTokens = lowMemoryMode ? 1024 : 2048;
-      const data = {
-        contents: chatHistory.slice(-10).map(msg => ({ role: msg.role, parts: [{ text: msg.text }] })), // Only last 10 for system prompt
-        systemInstruction: {
-          role: "assistant",
-          parts: [
-            {
-              text: `You are HoradrimAI, a Diablo II: Lord of Destruction AI assistant integrated with the Diablo II Wiki (https://wiki.diablo.run/); deliver precise, consistent information about characters, skills, items, quests, and gameplay systems—format code and builds cleanly, include relevant context, exclude filler, and address the player as ${getOperatorName()}.`
-            }
-          ]
-        },
-        generationConfig: {
-          temperature: 1,
-          topK: 40,
-          topP: 0.95,
-          maxOutputTokens: outputTokens,
-          responseMimeType: "text/plain"
-        },
-        tools: [
+    async function fetchDeepSeekResponse(message) {
+      console.log(`Sending message to DeepSeek API: ${message}`);
+      
+      // Your DeepSeek API Key
+      const apiKey = "sk-cef5bf12cc544b718d95069e8aed4af6";
+      
+      // DeepSeek API endpoint
+      const apiUrl = "https://api.deepseek.com/chat/completions";
+      
+      // Reduce max tokens for low memory mode
+      const maxTokens = lowMemoryMode ? 1024 : 2048;
+      
+      // Build messages array following DeepSeek format
+      const messages = [
         {
-          google_search: {}
+          role: "system",
+          content: `You are HoradrimAI, a Diablo II: Lord of Destruction AI assistant integrated with the Diablo II Wiki (https://wiki.diablo.run/); deliver precise, consistent information about characters, skills, items, quests, and gameplay systems—format code and builds cleanly, include relevant context, exclude filler, and address the player as ${getOperatorName()}.`
         }
-      ]
+      ];
+      
+      // Add chat history (last 10 messages for context)
+      const historyContext = chatHistory.slice(-10);
+      historyContext.forEach(msg => {
+        messages.push({
+          role: msg.role,
+          content: msg.text
+        });
+      });
+      
+      // Add the current user message
+      messages.push({
+        role: "user",
+        content: message
+      });
+
+      const requestData = {
+        model: "deepseek-chat",
+        messages: messages,
+        max_tokens: maxTokens,
+        temperature: 0.7,
+        stream: false
       };
-      const headers = new Headers();
-      headers.append("Content-Type", "application/json");
+
       try {
-        const response = await fetch(
-          "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey,
-          {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(data)
-          }
-        );
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
+          },
+          body: JSON.stringify(requestData)
+        });
+
         if (!response.ok) {
-          const errorResponse = await response.json();
-          console.error('API Request Failed:', errorResponse);
+          const errorText = await response.text();
+          console.error('DeepSeek API Request Failed:', response.status, errorText);
           throw new Error(`HTTP error! status: ${response.status}`);
         }
+
         const result = await response.json();
-        console.log(result);
-        if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
-          const botMessage = result.candidates[0].content.parts[0].text.trim();
+        console.log("DeepSeek API Response:", result);
+
+        if (result.choices && result.choices[0] && result.choices[0].message) {
+          const botMessage = result.choices[0].message.content.trim();
           addMessage(botMessage, "assistant");
         } else {
-          addMessage("I'm sorry, I am currently unable to process your request.", "assistant");
+          addMessage("I'm sorry, I am currently unable to process your request. Please try again.", "assistant");
         }
       } catch (error) {
-        console.error("Error:", error);
-        addMessage("I'm sorry, I am currently unable to process your request.", "assistant");
+        console.error("DeepSeek API Error:", error);
+        addMessage("I'm sorry, I am currently unable to process your request. Please check your connection and try again.", "assistant");
       }
     }
 
