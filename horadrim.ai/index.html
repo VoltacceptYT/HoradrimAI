@@ -142,8 +142,15 @@
       // Your DeepSeek API Key
       const apiKey = "sk-cef5bf12cc544b718d95069e8aed4af6";
       
-      // DeepSeek API endpoint
-      const apiUrl = "https://api.deepseek.com/chat/completions";
+      // OPTION 1: Using CORS Proxy (for development/testing only)
+      // Note: This exposes your API key in the request - NOT for production!
+      const proxyUrl = 'https://api.allorigins.win/raw?url=';
+      const targetUrl = 'https://api.deepseek.com/chat/completions';
+      const url = proxyUrl + encodeURIComponent(targetUrl);
+      
+      // OPTION 2: Using your own backend endpoint (recommended for production)
+      // You would need to set up a server with an endpoint that forwards requests
+      // const url = 'https://your-backend.com/api/deepseek'; // Your backend endpoint
       
       // Reduce max tokens for low memory mode
       const maxTokens = lowMemoryMode ? 1024 : 2048;
@@ -180,7 +187,7 @@
       };
 
       try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
