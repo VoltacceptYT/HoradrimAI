@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
             height: 100vh;
             overflow: hidden;
         }
-        
+
         #ie7-overlay {
             position: fixed;
             top: 100px;
@@ -24,7 +25,7 @@
             backdrop-filter: blur(14px) saturate(1.5) brightness(1.1);
             border: 0px solid rgba(120, 160, 220, 0.7);
             border-radius: 6px;
-            box-shadow: 0 0 14px rgba(0,0,0,0.45);
+            box-shadow: 0 0 14px rgba(0, 0, 0, 0.45);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -35,13 +36,13 @@
         }
 
         #ie7-header {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(200,220,240,0.4));
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(200, 220, 240, 0.4));
             padding: 4px 8px 4px 8px;
             cursor: move;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(160,160,160,0.5);
+            border-bottom: 1px solid rgba(160, 160, 160, 0.5);
             user-select: none;
         }
 
@@ -121,6 +122,7 @@
             font-size: 12px;
             cursor: pointer;
             margin-bottom: 10px;
+            margin-right: 2.5px;
         }
 
         #ie7-desktop-icon {
@@ -161,6 +163,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="ie7-overlay">
         <div id="ie7-header">
@@ -171,7 +174,12 @@
                 </div>
             </div>
             <div id="ie7-controls">
-                <button id="ie7-close">✖</button>
+                <button id="ie7-close"><svg width="800px" height="800px" viewBox="-6 -6 24 24"
+                        xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" fill="currentColor">
+                        <path
+                            d='M7.314 5.9l3.535-3.536A1 1 0 1 0 9.435.95L5.899 4.485 2.364.95A1 1 0 1 0 .95 2.364l3.535 3.535L.95 9.435a1 1 0 1 0 1.414 1.414l3.535-3.535 3.536 3.535a1 1 0 1 0 1.414-1.414L7.314 5.899z' />
+                    </svg>
+                </button>
             </div>
         </div>
         <iframe id="ie7-browser" src="https://horadrimai.vercel.app/"></iframe>
@@ -185,12 +193,12 @@
     <script>
         (function () {
             'use strict';
-            
+
             const GRID_SIZE = 64;
-            
+
             const overlay = document.getElementById('ie7-overlay');
             const desktopIcon = document.getElementById('ie7-desktop-icon');
-            
+
             // Drag overlay via header
             const header = document.getElementById('ie7-header');
             let draggingOverlay = false, offsetX = 0, offsetY = 0;
@@ -207,7 +215,7 @@
                 }
             });
             document.addEventListener('mouseup', () => draggingOverlay = false);
-            
+
             // Drag desktop icon with grid snap
             let draggingIcon = false, iconOffsetX = 0, iconOffsetY = 0;
             desktopIcon.addEventListener('mousedown', (e) => {
@@ -224,19 +232,19 @@
                 }
             });
             document.addEventListener('mouseup', () => draggingIcon = false);
-            
+
             // Double-click to restore
             desktopIcon.addEventListener('dblclick', () => {
                 overlay.style.display = 'flex';
                 desktopIcon.style.display = 'none';
             });
-            
+
             // Close
             document.getElementById('ie7-close').onclick = () => {
                 overlay.style.display = 'none';
                 desktopIcon.style.display = 'block';
             };
-            
+
             // Enable resizing
             overlay.addEventListener('mousedown', (e) => {
                 if (e.target === overlay) {
@@ -244,23 +252,24 @@
                     const startHeight = overlay.offsetHeight;
                     const startX = e.clientX;
                     const startY = e.clientY;
-                    
+
                     function onMouseMove(e) {
                         overlay.style.width = `${startWidth + (e.clientX - startX)}px`;
                         overlay.style.height = `${startHeight + (e.clientY - startY)}px`;
                     }
-                    
+
                     function onMouseUp() {
                         document.removeEventListener('mousemove', onMouseMove);
                         document.removeEventListener('mouseup', onMouseUp);
                     }
-                    
+
                     document.addEventListener('mousemove', onMouseMove);
                     document.addEventListener('mouseup', onMouseUp);
                 }
             });
-            
+
         })();
     </script>
 </body>
+
 </html>
