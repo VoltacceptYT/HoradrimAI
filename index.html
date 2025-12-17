@@ -106,30 +106,13 @@
             display: flex;
         }
 
-        #ie7-minimize {
-            background: linear-gradient(to bottom, #eee, #ccc);
-            color: #333;
-            border: 1px solid #666;
-            border-right: none;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-            border-bottom-left-radius: 3px;
-            border-bottom-right-radius: 0;
-            width: 26px;
-            height: 18px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-
         #ie7-close {
             background: linear-gradient(to bottom, #f66, #c00);
             color: white;
             border: 1px solid #900;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
-            border-bottom-left-radius: 0;
+            border-bottom-left-radius: 3px;
             border-bottom-right-radius: 3px;
             font-weight: bold;
             text-shadow: 0 -1px 0 #600;
@@ -188,7 +171,6 @@
                 </div>
             </div>
             <div id="ie7-controls">
-                <button id="ie7-minimize">—</button>
                 <button id="ie7-close">✖</button>
             </div>
         </div>
@@ -249,16 +231,10 @@
                 desktopIcon.style.display = 'none';
             });
             
-            // Minimize
-            document.getElementById('ie7-minimize').onclick = () => {
-                overlay.style.display = 'none';
-                desktopIcon.style.display = 'block';
-            };
-            
             // Close
             document.getElementById('ie7-close').onclick = () => {
-                overlay.remove();
-                desktopIcon.remove();
+                overlay.style.display = 'none';
+                desktopIcon.style.display = 'block';
             };
             
             // Enable resizing
