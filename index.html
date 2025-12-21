@@ -473,28 +473,27 @@
             // Create app manager
             window.appManager = new AppManager();
             
-            // Register your apps here
-            // Example: HoradrimAI app
+            // REGISTER APPS BELOW
+
+            // APP #1: HoradrimAI app
             const horadrimAI = window.appManager.registerApp({
                 id: 'horadrimai',
                 title: 'HoradrimAI',
-                iconUrl: 'https://horadrimai.vercel.app/assets/icon.png',
-                url: 'https://horadrimai.vercel.app/',
+                iconUrl: 'https://horadrimai.vercel.app/chat/assets/icon.png',
+                url: 'https://horadrimai.vercel.app/chat/',
                 windowPosition: { top: 100, left: 100 },
                 windowSize: { width: 726, height: 482 }
             });
             
-            // Example: Add another app (uncomment and customize as needed)
-            /*
-            const anotherApp = window.appManager.registerApp({
-                id: 'anotherapp',
-                title: 'Another App',
-                iconUrl: 'https://example.com/icon.png',
-                url: 'https://example.com/',
-                windowPosition: { top: 150, left: 150 },
-                windowSize: { width: 800, height: 600 }
+            // APP #2: VoltaNET Browser
+            const voltaNET = window.appManager.registerApp({
+                id: 'voltanet',
+                title: 'VoltaNET Browser',
+                iconUrl: 'https://horadrimai.vercel.app/browse/assets/icon.png',
+                url: 'https://horadrimai.vercel.app/browse/',
+                windowPosition: { top: 100, left: 100 },
+                windowSize: { width: 726, height: 482 }
             });
-            */
             
             // Add click-to-focus functionality for windows
             document.addEventListener('mousedown', (e) => {
