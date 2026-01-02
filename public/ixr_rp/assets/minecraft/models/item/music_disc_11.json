@@ -1,0 +1,62 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "item/music_disc_11"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "custom_model_data": 1
+            },
+            "model": "ixr:item/music_disc_beginning"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 2
+            },
+            "model": "ixr:item/music_disc_diamondcave"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 3
+            },
+            "model": "ixr:item/music_disc_fadingmemories"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 4
+            },
+            "model": "ixr:item/music_disc_sakuravalley"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 5
+            },
+            "model": "ixr:item/music_disc_voyage"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 6
+            },
+            "model": "ixr:item/music_disc_adventureawaits"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 7
+            },
+            "model": "ixr:item/music_disc_anotherday"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 8
+            },
+            "model": "ixr:item/music_disc_lasthallway"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 9
+            },
+            "model": "ixr:item/music_disc_pixelforest"
+        }
+    ]
+}

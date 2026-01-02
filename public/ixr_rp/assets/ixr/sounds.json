@@ -1,0 +1,74 @@
+{
+    "music_disc.beginning": {
+        "sounds": [
+            {
+                "name": "ixr:records/beginning",
+                "stream": true
+            }
+        ]
+    },
+    "music_disc.diamondcave": {
+        "sounds": [
+            {
+                "name": "ixr:records/diamondcave",
+                "stream": true
+            }
+        ]
+    },
+    "music_disc.fadingmemories": {
+        "sounds": [
+            {
+                "name": "ixr:records/fadingmemories",
+                "stream": true
+            }
+        ]
+    },
+    "music_disc.sakuravalley": {
+        "sounds": [
+            {
+                "name": "ixr:records/sakuravalley",
+                "stream": true
+            }
+        ]
+    },
+    "music_disc.voyage": {
+        "sounds": [
+            {
+                "name": "ixr:records/voyage",
+                "stream": true
+            }
+        ]
+    },
+    "music_disc.adventureawaits": {
+        "sounds": [
+            {
+                "name": "ixr:records/adventureawaits",
+                "stream": true
+            }
+        ]
+    },
+    "music_disc.anotherday": {
+        "sounds": [
+            {
+                "name": "ixr:records/anotherday",
+                "stream": true
+            }
+        ]
+    },
+    "music_disc.lasthallway": {
+        "sounds": [
+            {
+                "name": "ixr:records/lasthallway",
+                "stream": true
+            }
+        ]
+    },
+    "music_disc.pixelforest": {
+        "sounds": [
+            {
+                "name": "ixr:records/pixelforest",
+                "stream": true
+            }
+        ]
+    }
+}
