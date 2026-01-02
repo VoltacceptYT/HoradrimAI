@@ -16,6 +16,27 @@
         },
         {
             "type": "bitmap",
+            "file": "ixr:ranks/admin.png",
+            "ascent": 8,
+            "height": 8,
+            "chars": [""]
+        },
+        {
+            "type": "bitmap",
+            "file": "ixr:ranks/mod.png",
+            "ascent": 8,
+            "height": 8,
+            "chars": [""]
+        },
+        {
+            "type": "bitmap",
+            "file": "ixr:ranks/helper.png",
+            "ascent": 8,
+            "height": 8,
+            "chars": [""]
+        },
+        {
+            "type": "bitmap",
             "file": "ixr:icons/currency.png",
             "ascent": 8,
             "height": 8,
